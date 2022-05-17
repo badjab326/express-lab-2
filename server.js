@@ -32,6 +32,42 @@ app.get("/magic/:question", (req, res) => {
     res.send(`${req.params.question} <h1>${answers[x]}</h1>`);
 });
 
+// TAKE ONE DOWN AND PASS IT AROUND
+
+app.get('/0', (req, res) => {
+    res.send(`
+    <html>
+        <body>
+            <p> No more ottles of beer on the wall</p></br>
+            <a href="/">Start over?</a>
+        </body>
+    </html>
+`)
+});
+
+app.get('/:number_of_bottles', (req, res) => {
+    res.send(`
+    <html>
+        <body>
+            <p> ${req.params.number_of_bottles} Bottles of beer on the wall</p></br>
+            <a href="/${req.params.number_of_bottles - 1}">Take one down pass it around.</a>
+        </body>
+    </html>
+`)
+});
+
+app.get('/', (req, res) => {
+    const bottles = 98
+    res.send(`
+    <html>
+        <body>
+            <p>99 Bottles of beer on the wall</p></br>
+            <a href="/${bottles}">Take one down pass it around.</a>
+        </body>
+    </html>
+`)
+});
+
 
 app.listen(port, () => {
     console.log('Express is listening for requests from the browser on port', port);
