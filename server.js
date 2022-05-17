@@ -34,6 +34,9 @@ app.get("/magic/:question", (req, res) => {
 
 // TAKE ONE DOWN AND PASS IT AROUND
 
+// If there are 0 bottles left, do not show a link to "take one down"
+// Add a link to start over, which directs the user back to the home page.
+
 app.get('/0', (req, res) => {
     res.send(`
     <html>
@@ -44,6 +47,10 @@ app.get('/0', (req, res) => {
     </html>
 `)
 });
+
+// When a number is given in the url (get "/:number_of_bottles"), users should see:
+// The number of bottles of beer on the wall (i.e. 98 Bottles of beer on the wall.)
+// a link to "take one down, pass it around", where the href is number of bottles in the parameter minus 1.
 
 app.get('/:number_of_bottles', (req, res) => {
     res.send(`
@@ -56,6 +63,11 @@ app.get('/:number_of_bottles', (req, res) => {
 `)
 });
 
+// On the home page (get "/"), users should see:
+// "99 Bottles of beer on the wall"
+// a link that says "take one down, pass it around"
+// this should link to /98, where the number represents the number of bottles left.
+
 app.get('/', (req, res) => {
     const bottles = 98
     res.send(`
@@ -67,7 +79,6 @@ app.get('/', (req, res) => {
     </html>
 `)
 });
-
 
 app.listen(port, () => {
     console.log('Express is listening for requests from the browser on port', port);
